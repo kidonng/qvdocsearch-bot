@@ -56,6 +56,9 @@ export const docsearch: Component = (telegraf) => {
         }
       })
 
-    ctx.answerInlineQuery(results)
+    ctx.answerInlineQuery(results, {
+      // https://docsearch.algolia.com/docs/scraper/#when
+      cache_time: 86400,
+    })
   })
 }
