@@ -6,7 +6,7 @@ Source code for Telegram bot [@Qvdocsearchbot](https://t.me/Qvdocsearchbot), an 
 
 The following environment variables should be provided:
 
-- `BOT_TOKEN`: Telegram bot token. The bot should be added to your **public** channel first. [Click here](http://t.me/BotFather) to create a bot.
+- `BOT_TOKEN`: Telegram bot token. [Click here](http://t.me/BotFather) to create a bot.
 - `ALGOLIA_API_KEY`: DocSearch API key.
 - `ALGOLIA_INDEX_NAME`: DocSearch index name.
 
