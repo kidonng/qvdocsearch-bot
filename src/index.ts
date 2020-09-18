@@ -19,4 +19,7 @@ telegraf.on('message', ({ telegram }) => {
   }
 })
 
-if (!IS_VERCEL) telegraf.launch()
+if (!IS_VERCEL) {
+  telegraf.webhookReply = false
+  telegraf.launch()
+}
