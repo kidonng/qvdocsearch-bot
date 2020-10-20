@@ -14,10 +14,14 @@ export interface Component {
   (telegraf: Telegraf<IContext>): void
 }
 
+export interface MessageHandler {
+  (ctx: IContext): void
+}
+
 // https://stackoverflow.com/a/60145565
 export const escape = (text: string) =>
   text.replace(/(\[[^\][]*]\(http[^()]*\))|[[\]()>#+\-=|{}.!]/gi, (x, y) =>
     y ? y : '\\' + x
   )
 
-export const request: { handler?: NowResponse } = {}
+export const handlers: { response?: NowResponse; message?: MessageHandler } = {}

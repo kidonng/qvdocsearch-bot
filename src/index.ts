@@ -1,25 +1,19 @@
 import Telegraf from 'telegraf'
 import { docsearch } from './docsearch'
-import { IContext, request } from './utils'
+import { fallback } from './fallback'
+import { IContext } from './utils'
 
 const { BOT_TOKEN, IS_VERCEL } = process.env
 
-if (!BOT_TOKEN)
-  throw Error('Please provide BOT_TOKEN as an environment variable')
-
-export const telegraf = new Telegraf<IContext>(BOT_TOKEN)
-
-docsearch(telegraf)
-
-telegraf.on('message', ({ telegram }) => {
-  // Workaround for skipping unhandled messages
-  // https://github.com/telegraf/telegraf/issues/1089
-  if (telegram.webhookReply) {
-    request.handler!.status(200).end()
-  }
-})
+export const telegraf = new Telegraf<IContext>(BOT_TOKEN!)
+export const register = () => {
+  const components = [docsearch, fallback]
+  for (const component of components) component(telegraf)
+}
 
 if (!IS_VERCEL) {
   telegraf.webhookReply = false
+
+  register()
   telegraf.launch()
 }
