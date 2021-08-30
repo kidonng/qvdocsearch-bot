@@ -1,10 +1,6 @@
-import { NowRequest, NowResponse } from '@vercel/node'
-import { telegraf, register } from '../src'
-import { handlers } from '../src/utils'
+import { VercelRequest, VercelResponse } from '@vercel/node'
+import { telegraf } from '../src'
 
-export default async ({ body }: NowRequest, res: NowResponse) => {
-  handlers.response = res
-
-  register()
+export default async ({ body }: VercelRequest, res: VercelResponse) => {
   return telegraf.handleUpdate(body, res)
 }
